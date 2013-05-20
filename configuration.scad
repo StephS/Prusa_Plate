@@ -24,7 +24,7 @@ threaded_rod_distance = 320;
 vertex_rod_to_rod_distance = 58.5;
 rod_distance_to_edge = 15;
 rod_distance_to_cutout = 30;
-center_rod_offset=1.75;
+center_rod_offset=2.5;
 
 bottom_vertex_angle = 30;
 
