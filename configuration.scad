@@ -12,6 +12,7 @@
 // functions
 include <inc/functions.scad>;
 include <inc/nuts_screws.scad>;
+include <printer_conf.scad>;
 
 use_fillets=true;
 // Custom settings here, tailor to your supplies and print settings
@@ -24,7 +25,7 @@ threaded_rod_distance = 320;
 vertex_rod_to_rod_distance = 58.5;
 rod_distance_to_edge = 15;
 rod_distance_to_cutout = 30;
-center_rod_offset=2.5;
+center_rod_offset=3;
 
 bottom_vertex_angle = 30;
 

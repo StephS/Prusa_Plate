@@ -7,6 +7,9 @@
 // http://www.reprap.org/wiki/Prusa_Mendel
 // http://github.com/prusajr/PrusaMendel
 include <fillets.scad>
+//include <nuts_screws.scad>
+
+use_fillets=true;
 
 module chamfer(x=10,y=10,z=10) {
  rotate(a=[90,-90,0])
@@ -22,6 +25,13 @@ module chamfer(x=10,y=10,z=10) {
 [0,1,2,3,4]]
        );
 }
+
+function sagitta_arc(r, angle) = (r* (1 - cos(angle/2) ));
+
+function sagitta(r, l) = r - sqrt(pow(r,2) - pow(l,2));
+
+function sagitta_radius(s, l) = (pow(s,2) + pow(l,2))/ (2*s);
+//function sagitta_radius(s, l) = (hypotenuse / 2) / cos(90 - atan(short side / long side));
 
 // This will size an outer diameter to fit inside dia with $fn sides
 // use this to set the diameter before passing to polyhole
@@ -68,15 +78,15 @@ module trapezoid(cube=[10, 10, 10], x1=0, x2=0, y1=0, y2=0, center=false) {
 	}
 }
 
-module cube_fillet(size, radius=-1, vertical=[3,3,3,3], top=[0,0,0,0], bottom=[0,0,0,0], center=false, $fn=0){
+module cube_fillet(size, radius=-1, vertical=[3,3,3,3], top=[0,0,0,0], bottom=[0,0,0,0], center=false, $fn=0, vertical_fn=[0,0,0,0], top_fn=[0,0,0,0], bottom_fn=[0,0,0,0]){
     //
     render(convexity = 2)
     if (use_fillets) {
         if (center) {
-            cube_fillet_inside(size, radius, vertical, top, bottom, $fn);
+            cube_fillet_inside(size, radius, vertical, top, bottom, $fn, vertical_fn, top_fn, bottom_fn);
         } else {
             translate([size[0]/2, size[1]/2, size[2]/2])
-                cube_fillet_inside(size, radius, vertical, top, bottom, $fn);
+                cube_fillet_inside(size, radius, vertical, top, bottom, $fn, vertical_fn, top_fn, bottom_fn);
         }
     } else {
         cube(size, center);
